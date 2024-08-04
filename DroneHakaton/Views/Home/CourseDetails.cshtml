@@ -1,0 +1,83 @@
+﻿<div class="container mt-5">
+    <h1 class="mb-4">Название курса: Введение в БАС</h1>
+
+    <!-- Описание курса -->
+    <div class="card mb-4">
+        <div class="card-header">
+            Описание курса
+        </div>
+        <div class="card-body">
+            <p>Этот курс предоставляет базовые знания о беспилотных авиационных системах (БАС), охватывает основы управления дроном, безопасность, а также вводит в основные принципы использования дронов в различных отраслях.</p>
+        </div>
+    </div>
+
+    <!-- Модули курса -->
+    <div class="card mb-4">
+        <div class="card-header">
+            Модули курса
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <strong>Лекция 1:</strong> Введение в БАС
+                    <span class="badge bg-primary float-end">Лекция</span>
+                </li>
+                <li class="list-group-item">
+                    <strong>Тест 1:</strong> Основы управления дроном
+                    <span class="badge bg-success float-end">Тест</span>
+                </li>
+                <li class="list-group-item">
+                    <strong>Практическое задание 1:</strong> Первый полёт
+                    <span class="badge bg-warning float-end">Практика</span>
+                </li>
+                <!-- Добавьте больше модулей по мере необходимости -->
+            </ul>
+        </div>
+        <div class="btn-group">
+            <a asp-action="@nameof(HomeController.Module)" asp-controller="@nameof(HomeController).CutController()"
+               asp-route-courseId="test-data" asp-route-moduleId="test-data"
+               class="btn btn-outline-info">
+                Начать
+            </a>
+            <a asp-action="@nameof(HomeController.Module)" asp-controller="@nameof(HomeController).CutController()"
+               asp-route-courseId="test-data" asp-route-moduleId="test-data"
+               class="btn btn-outline-success">
+                Записаться
+            </a>
+        </div>
+    </div>
+
+    <!-- Список участников -->
+    <div class="card mb-4">
+        <div class="card-header">
+            Участники курса
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Имя пользователя</th>
+                        <th>Email</th>
+                        <th>Роль</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>ivanov</td>
+                        <td>ivanov@example.com</td>
+                        <td>Студент</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>petrov</td>
+                        <td>petrov@example.com</td>
+                        <td>Преподаватель</td>
+                    </tr>
+                    <!-- Добавьте больше участников по мере необходимости -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

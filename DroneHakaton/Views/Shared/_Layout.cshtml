@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@ViewData["Title"] - DroneHakaton</title>
+    @await Html.PartialAsync("MetaPartial")
+    @await Html.PartialAsync("CssPartial")
+</head>
+<body>
+    @await Html.PartialAsync("Navbar")
+
+    <main>
+        @RenderBody()
+    </main>
+
+    @await Html.PartialAsync("FooterPartial")
+    
+    @await RenderSectionAsync("ScriptsPartial", required: false)
+</body>
+</html>

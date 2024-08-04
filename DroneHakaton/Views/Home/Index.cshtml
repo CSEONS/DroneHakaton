@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container mt-5 mb-4">
+    <h1 class="mb-4">Добро пожаловать в Панель управления EduPlatform</h1>
+
+    <!-- Карточки с основной информацией -->
+    <div class="row">
+        <!-- Количество курсов -->
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Всего курсов</h5>
+                    <p class="card-text display-4">12</p>
+                </div>
+            </div>
+        </div>
+        <!-- Количество пользователей -->
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Всего пользователей</h5>
+                    <p class="card-text display-4">350</p>
+                </div>
+            </div>
+        </div>
+        <!-- Количество завершённых курсов -->
+        <div class="col-md-4">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Завершённых курсов</h5>
+                    <p class="card-text display-4">45</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Список курсов -->
+    <div class="card mt-5">
+        <div class="card-header">
+            <p>
+                Новые курсы
+            </p>
+            <a asp-action="@nameof(HomeController.Courses)" asp-controller="@nameof(HomeController).CutController()"
+                class="btn btn-outline-info">Все курсы</a>
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                <li class="list-group-item">Введение в дроны</li>
+                <li class="list-group-item">Продвинутая навигация дронов</li>
+                <li class="list-group-item">Безопасность и регулирование дронов</li>
+                <li class="list-group-item">Практические упражнения с дронами</li>
+                <li class="list-group-item">Обслуживание и ремонт дронов</li>
+            </ul>
+        </div>
+    </div>
+</div>

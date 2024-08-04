@@ -1,0 +1,164 @@
+﻿<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
+<style>
+    .module-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .module-item {
+        padding: 10px;
+        margin: 5px 0;
+        background-color: #f8f9fa;
+        border: 1px solid #ddd;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .drag-handle {
+        cursor: grab;
+    }
+
+    .ui-state-highlight {
+        height: 3em;
+        line-height: 1.2em;
+        background-color: #f0f0f0;
+        border: 1px dashed #ddd;
+        margin-bottom: 5px;
+    }
+</style>
+
+<div class="container mt-4">
+    <h1 class="mb-4">Course Editor</h1>
+    <form id="courseForm">
+        <div class="mb-3">
+            <label for="courseTitle" class="form-label">Course Title</label>
+            <input type="text" class="form-control" id="courseTitle" required>
+        </div>
+        <div class="mb-3">
+            <label for="courseDescription" class="form-label">Course Description</label>
+            <textarea class="form-control" id="courseDescription" rows="3" required></textarea>
+        </div>
+    </form>
+    <h2 class="mb-3">Modules</h2>
+    <ul id="moduleList" class="module-list"></ul>
+    <button class="btn btn-primary mb-3" id="addModuleBtn">Add Module</button>
+</div>
+
+<!-- Modal for Adding/Editing Modules -->
+<div class="modal fade" id="moduleModal" tabindex="-1" aria-labelledby="moduleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="moduleModalLabel">Add/Edit Module</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="moduleForm">
+                    <div class="mb-3">
+                        <label for="moduleName" class="form-label">Module Name</label>
+                        <input type="text" class="form-control" id="moduleName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="moduleType" class="form-label">Module Type</label>
+                        <select class="form-select" id="moduleType" required>
+                            <option value="Article">Article</option>
+                            <option value="Quiz">Quiz</option>
+                            <option value="Game">Game</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveModuleBtn">Save Module</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // jQuery to handle module operations
+    $(document).ready(function () {
+        const moduleList = $('#moduleList');
+        let currentEditingIndex = null;
+
+        // Initialize jQuery UI Sortable
+        moduleList.sortable({
+            handle: '.drag-handle',
+            placeholder: 'ui-state-highlight',
+            axis: 'y'
+        });
+
+        // Add module button click
+        $('#addModuleBtn').click(function () {
+            currentEditingIndex = null;
+            $('#moduleName').val('');
+            $('#moduleType').val('Article');
+            $('#moduleModal').modal('show');
+        });
+
+        // Save module button click
+        $('#saveModuleBtn').click(function () {
+            const moduleName = $('#moduleName').val();
+            const moduleType = $('#moduleType').val();
+            if (!moduleName || !moduleType) {
+                alert('Please enter module name and type');
+                return;
+            }
+
+            if (currentEditingIndex !== null) {
+                updateModule(currentEditingIndex, moduleName, moduleType);
+            } else {
+                addModule(moduleName, moduleType);
+            }
+            $('#moduleModal').modal('hide');
+        });
+
+        // Function to add a module
+        function addModule(name, type) {
+            const moduleItem = $(`
+                    <li class="module-item">
+                        <span class="module-name">${name} (${type})</span>
+                        <div>
+                            <i class="fa fa-arrows-alt drag-handle me-2" role="button"></i>
+                            <i class="fa fa-edit text-primary me-2" role="button"></i>
+                            <i class="fa fa-trash text-danger" role="button"></i>
+                        </div>
+                    </li>
+                `);
+            moduleItem.find('.fa-edit').click(() => editModule(moduleItem));
+            moduleItem.find('.fa-trash').click(() => deleteModule(moduleItem));
+            moduleList.append(moduleItem);
+        }
+
+        // Function to edit a module
+        function editModule(moduleItem) {
+            currentEditingIndex = moduleList.children().index(moduleItem);
+            const [name, type] = moduleItem.find('.module-name').text().split(' (');
+            $('#moduleName').val(name);
+            $('#moduleType').val(type.slice(0, -1));  // Remove the trailing ')'
+            $('#moduleModal').modal('show');
+        }
+
+        // Function to update a module
+        function updateModule(index, name, type) {
+            const moduleItem = moduleList.children().eq(index);
+            moduleItem.find('.module-name').text(`${name} (${type})`);
+        }
+
+        // Function to delete a module
+        function deleteModule(moduleItem) {
+            if (confirm('Are you sure you want to delete this module?')) {
+                moduleItem.remove();
+            }
+        }
+    });
+</script>

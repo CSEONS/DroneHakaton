@@ -1,0 +1,157 @@
+﻿<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .navbar {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .container {
+        max-width: 700px;
+    }
+
+    .card {
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 8px 8px 0 0;
+        font-weight: bold;
+    }
+
+    .card-body {
+        padding: 2rem;
+    }
+
+    .list-group-item {
+        cursor: pointer;
+        padding: 1rem;
+        margin-bottom: 10px;
+        border: 1px solid #007bff;
+        border-radius: 5px;
+        background-color: #f0f8ff;
+    }
+
+        .list-group-item:hover {
+            background-color: #e6f2ff;
+        }
+
+    .btn-primary {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1.25rem;
+    }
+
+    #questionContainer p {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+    }
+
+    #resultMessage {
+        font-size: 1.5rem;
+        text-align: center;
+        font-weight: bold;
+        color: #28a745;
+    }
+</style>
+
+@if (false)
+{
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header text-center">
+                Тест: Основы БАС
+            </div>
+            <div class="card-body">
+                <!-- Секция теста -->
+                <div id="testSection">
+                    <div id="questionContainer">
+                        <!-- Вопросы будут добавляться динамически -->
+                    </div>
+                    <button id="nextQuestionBtn" class="btn btn-primary mt-3" style="display: none;" onclick="loadNextQuestion()">Следующий вопрос</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else if (true)
+{
+ <div class="container">
+     Lorem ksf wofj woif woif woeif jwo ef
+ </div>   
+}
+else if (true)
+{
+
+    <div class="container"
+        style="display: flex;
+               justify-content: center;
+               align-items: center;
+               flex-direction: column;
+               height: 100%;">
+        <h1>37841</h1>
+        <h3>Введите код в приложении</h3>
+    </div>
+}
+
+<script>
+    // Вопросы для теста
+    var questions = [
+        {
+            question: "Что такое БАС?",
+            answers: ["Беспилотная авиационная система", "Базовая авиационная станция", "Беспилотная авиастанция"],
+            correctAnswer: 0
+        },
+        {
+            question: "Каковы основные компоненты БАС?",
+            answers: ["Двигатель, шасси, крылья", "Камера, управление, аккумулятор", "Все вышеперечисленное"],
+            correctAnswer: 2
+        },
+        {
+            question: "Какая максимальная высота полета БАС без специального разрешения?",
+            answers: ["100 метров", "120 метров", "150 метров"],
+            correctAnswer: 1
+        }
+    ];
+    var currentQuestionIndex = 0;
+    var correctAnswers = 0;
+
+    function loadNextQuestion() {
+        var questionContainer = document.getElementById("questionContainer");
+        var nextQuestionBtn = document.getElementById("nextQuestionBtn");
+
+        if (currentQuestionIndex < questions.length) {
+            var q = questions[currentQuestionIndex];
+            questionContainer.innerHTML = `
+                        <p><strong>Вопрос ${currentQuestionIndex + 1}:</strong> ${q.question}</p>
+                        <ul class="list-group">
+                            ${q.answers.map((answer, index) => `
+                                <li class="list-group-item" onclick="selectAnswer(${index})">${answer}</li>
+                            `).join('')}
+                        </ul>
+                    `;
+            nextQuestionBtn.style.display = "none";
+        } else {
+            questionContainer.innerHTML = `<p id="resultMessage">Вы ответили правильно на ${correctAnswers} из ${questions.length} вопросов.</p>`;
+            nextQuestionBtn.style.display = "none";
+        }
+    }
+
+    function selectAnswer(selectedIndex) {
+        var q = questions[currentQuestionIndex];
+        if (selectedIndex === q.correctAnswer) {
+            correctAnswers++;
+        }
+        currentQuestionIndex++;
+        document.getElementById("nextQuestionBtn").style.display = "block";
+    }
+
+    // Инициализация
+    loadNextQuestion();
+</script>

@@ -1,0 +1,144 @@
+﻿<style>
+    .card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* Ограничение строк заголовка */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .card-text {
+        flex-grow: 1;
+        display: -webkit-box;
+        -webkit-line-clamp: 4; /* Ограничение строк описания */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .difficulty-easy::before {
+        content: "● ";
+        color: green;
+    }
+
+    .difficulty-medium::before {
+        content: "● ";
+        color: yellow;
+    }
+
+    .difficulty-hard::before {
+        content: "● ";
+        color: red;
+    }
+
+    .rating {
+        font-size: 1.25rem;
+        color: gold;
+    }
+
+    .icons {
+        font-size: 1.5rem;
+        margin-top: 10px;
+    }
+
+        .icons i {
+            margin-right: 10px;
+        }
+
+    .mt-auto {
+        margin-top: auto;
+    }
+</style>
+
+<div class="container mt-5">
+    <h1 class="mb-4">Courses</h1>
+
+    <!-- Панель поиска и добавления курса -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <input type="text" class="form-control" placeholder="Search courses...">
+        </div>
+        <div class="col-md-4 text-end">
+            <button class="btn btn-primary">Search</button>
+        </div>
+    </div>
+
+    <!-- Таблица курсов -->
+    <div class="container">
+        <!-- Карточки курсов -->
+        <div class="row">
+            <!-- Карточка курса 1 -->
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <a asp-action="@nameof(HomeController.CourseDetails)" asp-controller="@nameof(HomeController).CutController()">
+                        <img src="https://via.placeholder.com/300x150" class="card-img-top" alt="Изображение курса 1">
+                    </a>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Введение в дроны</h5>
+                        <p class="card-text">Руководство для начинающих по дронам и их применению. Подробное изучение основ и применения дронов в различных областях.</p>
+                        <div class="rating">
+                            ★★★☆☆
+                        </div>
+                        <p class="difficulty difficulty-easy">Уровень сложности: Легкий</p>
+                        <div class="icons mt-auto">
+                            <i class="bi bi-gamepad" title="Модульная игра"></i>
+                            <i class="bi bi-check-circle" title="Тесты"></i>
+                            <i class="bi bi-film" title="Видеоролики"></i>
+                            <i class="bi bi-file-text" title="Текст-лекция"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Карточка курса 2 -->
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <a href="#">
+                        <img src="https://via.placeholder.com/300x150" class="card-img-top" alt="Изображение курса 1">
+                    </a>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Продвинутая навигация дронов и управление на высшем уровне</h5>
+                        <p class="card-text">Изучите продвинутые техники навигации дронов. Узнайте, как оптимизировать управление и увеличить эффективность ваших полетов.</p>
+                        <div class="rating">
+                            ★★★★☆
+                        </div>
+                        <p class="difficulty difficulty-medium">Уровень сложности: Средний</p>
+                        <div class="icons mt-auto">
+                            <i class="bi bi-check-circle" title="Тесты"></i>
+                            <i class="bi bi-film" title="Видеоролики"></i>
+                            <i class="bi bi-file-text" title="Текст-лекция"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Карточка курса 3 -->
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <a href="#">
+                        <img src="https://via.placeholder.com/300x150" class="card-img-top" alt="Изображение курса 1">
+                    </a>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Безопасность и регулирование дронов</h5>
+                        <p class="card-text">Понимание протоколов безопасности и регуляций для использования дронов. Обзор актуальных стандартов и рекомендаций.</p>
+                        <div class="rating">
+                            ★★★☆☆
+                        </div>
+                        <p class="difficulty difficulty-hard">Уровень сложности: Сложный</p>
+                        <div class="icons mt-auto">
+                            <i class="bi bi-check-circle" title="Тесты"></i>
+                            <i class="bi bi-file-text" title="Текст-лекция"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Добавьте больше карточек курсов по мере необходимости -->
+        </div>
+    </div>
+</div>

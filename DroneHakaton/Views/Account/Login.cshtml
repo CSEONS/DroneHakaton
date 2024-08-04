@@ -1,0 +1,68 @@
+﻿<div class="mt-5" 
+    style="
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    height: 100%;
+">
+    <div class="form-container">
+        <!-- Login Form -->
+        <h2>Вход</h2>
+        <form asp-action="@nameof(AccountController.Login)" asp-controller="@nameof(AccountController).CutController()">
+            <div class="form-group">
+                <label for="email">Электронная почта</label>
+                <input name="email" type="email" class="form-control" id="email" placeholder="Введите вашу почту">
+            </div>
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input name="password" type="password" class="form-control" id="password" placeholder="Введите ваш пароль">
+            </div>
+            <button type="submit" class="btn btn-primary">Войти</button>
+            <p class="form-text">
+                Нет аккаунта? <a href="#" id="show-register">Зарегистрируйтесь</a>
+            </p>
+        </form>
+
+        <!-- Register Form -->
+        <h2 class="d-none" id="register-title">Регистрация</h2>
+        <form asp-action="@nameof(AccountController.Register)" asp-controller="@nameof(AccountController).CutController()"
+            class="d-none" id="register-form">
+            <div class="form-group">
+                <label for="register-username">Логин</label>
+                <input name="username" type="text" class="form-control" id="register-username" placeholder="Введите ваш никнейм">
+            </div>
+            <div class="form-group">
+                <label for="register-email">Электронная почта</label>
+                <input name="email" type="email" class="form-control" id="register-email" placeholder="Введите вашу почту">
+            </div>
+            <div class="form-group">
+                <label for="register-password">Пароль</label>
+                <input name="password" type="password" class="form-control" id="register-password" placeholder="Введите ваш пароль">
+            </div>
+            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+            <p class="form-text">
+                Уже есть аккаунт? <a href="#" id="show-login">Войдите</a>
+            </p>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Переключение между формами
+    document.getElementById('show-register').addEventListener('click', function (event) {
+        event.preventDefault();
+        document.querySelector('form').classList.add('d-none');
+        document.querySelector('#register-form').classList.remove('d-none');
+        document.querySelector('h2').classList.add('d-none');
+        document.querySelector('#register-title').classList.remove('d-none');
+    });
+
+    document.getElementById('show-login').addEventListener('click', function (event) {
+        event.preventDefault();
+        document.querySelector('#register-form').classList.add('d-none');
+        document.querySelector('form').classList.remove('d-none');
+        document.querySelector('#register-title').classList.add('d-none');
+        document.querySelector('h2').classList.remove('d-none');
+    });
+</script>
